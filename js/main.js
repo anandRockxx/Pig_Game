@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var score, roundscore, activePlayer;
+var scores, roundscore, activePlayer;
 
 scores = [0,0];
 roundscore = 0;
@@ -51,7 +51,47 @@ if (random !== 1) {
 
 }else{
 
-	// Change the player
+	nextPlayer();
+}   
+
+
+});
+
+
+// When hold button is clicked
+
+var hold = document.getElementById('hold').addEventListener('click',function(){
+
+ scores[activePlayer] += roundscore;
+
+ document.getElementById('score-'+ activePlayer).textContent = scores[activePlayer];
+
+
+
+ // check if player won the game
+ if (scores[activePlayer] >=20) {
+
+ 	document.querySelector('#name-'+ activePlayer).textContent = 'Winner';
+
+ 	document.getElementById('dice').style.display = 'none';
+
+ 	document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+
+ 	document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+
+ }else{
+
+ 	 // next player
+      nextPlayer();
+ }
+
+
+});
+
+
+function nextPlayer(){
+
+// Change the player
 	activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
 	roundscore = 0;
 
@@ -62,78 +102,6 @@ if (random !== 1) {
     document.getElementById('panel1').classList.toggle('active'); 
 
     document.getElementById('dice').style.display = 'none';
-}   
 
-
-
-
-});
-
-
-// When hold button is clicked
-
-var hold = document.getElementById('hold').addEventListener('click',function(){
-
-
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
