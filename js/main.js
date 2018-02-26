@@ -9,4 +9,131 @@ GAME RULES:
 
 */
 
+var score, roundscore, activePlayer;
+
+scores = [0,0];
+roundscore = 0;
+activePlayer = 0;
+
+// Hide the dice 
+
+document.getElementById('dice').style.display = 'none';
+
+
+
+// When roll button is clicked
+
+var roll = document.getElementById('roll').addEventListener('click', function(){
+
+// Random number
+var random = Math.floor(Math.random() * 6 + 1);
+
+
+
+// Display result
+
+var dice = document.getElementById('dice');
+
+dice.style.display = 'block';
+
+dice.src = 'img/dice-'+random+'.png';
+
+document.getElementById('current-'+ activePlayer).textContent = random;
+
+
+// Change the player if dice is 1
+
+if (random !== 1) {
+	// Add the score to the roundscore
+	roundscore += random ;
+
+	document.getElementById('current-'+ activePlayer).textContent = roundscore;
+
+}else{
+
+	// Change the player
+	activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+	roundscore = 0;
+
+	document.getElementById('current-0').textContent = '0';
+	document.getElementById('current-1').textContent = '0';
+
+    document.getElementById('panel').classList.toggle('active');    
+    document.getElementById('panel1').classList.toggle('active'); 
+
+    document.getElementById('dice').style.display = 'none';
+}   
+
+
+
+
+});
+
+
+// When hold button is clicked
+
+var hold = document.getElementById('hold').addEventListener('click',function(){
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
