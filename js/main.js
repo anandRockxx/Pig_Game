@@ -9,21 +9,15 @@ GAME RULES:
 
 */
 
-var scores, roundscore, activePlayer;
+var scores, roundscore, activePlayer, gamePlaying;
 
-scores = [0,0];
-roundscore = 0;
-activePlayer = 0;
-
-// Hide the dice 
-
-document.getElementById('dice').style.display = 'none';
-
-
+init();
 
 // When roll button is clicked
 
 var roll = document.getElementById('roll').addEventListener('click', function(){
+
+	if (gamePlaying) {
 
 // Random number
 var random = Math.floor(Math.random() * 6 + 1);
@@ -55,12 +49,18 @@ if (random !== 1) {
 }   
 
 
+	}
+
+
 });
 
 
 // When hold button is clicked
 
 var hold = document.getElementById('hold').addEventListener('click',function(){
+
+	if (gamePlaying) {
+
 
  scores[activePlayer] += roundscore;
 
@@ -71,7 +71,8 @@ var hold = document.getElementById('hold').addEventListener('click',function(){
  // check if player won the game
  if (scores[activePlayer] >=20) {
 
- 	document.querySelector('#name-'+ activePlayer).textContent = 'Winner';
+
+ 	document.querySelector('#name-'+ [activePlayer]).textContent = 'Winner';
 
  	document.getElementById('dice').style.display = 'none';
 
@@ -79,11 +80,16 @@ var hold = document.getElementById('hold').addEventListener('click',function(){
 
  	document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
 
+    gamePlaying = false;
+
  }else{
 
  	 // next player
       nextPlayer();
  }
+
+
+	}
 
 
 });
@@ -105,3 +111,40 @@ function nextPlayer(){
 
 }
 
+document.getElementById('new_game').addEventListener('click', init);
+
+
+function init() {
+	
+scores = [0,0];
+roundscore = 0;
+activePlayer = 0;
+gamePlaying = true;
+
+// Hide the dice 
+
+document.getElementById('dice').style.display = 'none';
+
+    document.querySelector('#name-0').textContent = 'Player 1';
+
+    document.querySelector('#name-1').textContent = 'Player 2';
+
+    document.querySelector('#score-0').textContent = '0';
+
+    document.querySelector('#score-1').textContent = '0';
+
+    document.querySelector('#current-0').textContent = '0';
+
+    document.querySelector('#current-1').textContent = '0';
+
+ 	document.querySelector('.player-0-panel').classList.remove('winner');
+
+ 	document.querySelector('.player-1-panel').classList.remove('winner');
+
+ 	document.querySelector('.player-0-panel').classList.remove('active');
+
+ 	document.querySelector('.player-0-panel').classList.add('active');
+
+ 	document.querySelector('.player-1-panel').classList.remove('active');
+
+}
