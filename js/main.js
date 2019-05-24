@@ -8,6 +8,12 @@ var roll = document.getElementById('roll').addEventListener('click', function() 
 
 	if (gamePlaying) {
 
+		var input_win_score = document.getElementById('win_score').value;
+
+		if(input_win_score === ''){
+			alert('Please decide wining score.')
+		}else{
+
 		// Random number
 		var random = Math.floor(Math.random() * 6 + 1);
 
@@ -55,6 +61,7 @@ var roll = document.getElementById('roll').addEventListener('click', function() 
 		}
 
 
+		}
 	}
 
 
@@ -150,15 +157,29 @@ function init() {
 	ranNum = 0;
 	new_score = 0;
 
-	// Hide the dice 
 
+
+	var player_1 = prompt('What is your name player 1');
+	var player_2;
+
+	if(player_1 !== null && player_1 !== '') {
+		player_2 = prompt('What is your name player 2');
+		if(player_2 === null || player_2 === '') {
+			window.location.reload();		
+		}
+	} else{
+		window.location.reload();	
+	}
+
+
+	// Hide the dice 
 	document.getElementById('dice').style.display = 'none';
 
 	document.getElementById('dice-2').style.display = 'none';
 
-	document.querySelector('#name-0').textContent = 'Player 1';
+	document.querySelector('#name-0').textContent = player_1;
 
-	document.querySelector('#name-1').textContent = 'Player 2';
+	document.querySelector('#name-1').textContent = player_2;
 
 	document.querySelector('#score-0').textContent = '0';
 
